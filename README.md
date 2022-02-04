@@ -1,6 +1,3 @@
-# This project integrates other work from ESP-IDF projects for LoRa, and SSD1309 OLED displays for boards like the Lilygo TTGO LoRa Series.
-
-
 
 # SSD1306 OLED display for ESP32 - Espressif IDF development environment
 

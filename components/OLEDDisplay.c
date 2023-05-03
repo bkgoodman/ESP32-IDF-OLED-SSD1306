@@ -161,7 +161,7 @@ static void OLEDDisplay_sendCommand(OLEDDisplay_t *oled, uint8_t opcode)
     i2c_master_write_byte(cmd, 0x80, BKG_ACK_CHECK  );
     i2c_master_write_byte(cmd, opcode,  BKG_ACK_CHECK  );
     i2c_master_stop(cmd);
-    esp_err_t ret = i2c_master_cmd_begin(oled->i2c_port, cmd, 1000 / portTICK_RATE_MS);
+    esp_err_t ret = i2c_master_cmd_begin(oled->i2c_port, cmd, 1000 / portTICK_PERIOD_MS);
     i2c_cmd_link_delete(cmd);
 }
 
@@ -182,7 +182,7 @@ static void OLEDDisplay_i2cwrite(OLEDDisplay_t *oled,uint8_t d)
 static esp_err_t OLEDDisplay_endPayload(OLEDDisplay_t *oled) {
     i2c_cmd_handle_t cmd = oled->i2c_cmd;
     i2c_master_stop(cmd);
-    esp_err_t ret = i2c_master_cmd_begin(oled->i2c_port, cmd, 1000 / portTICK_RATE_MS);
+    esp_err_t ret = i2c_master_cmd_begin(oled->i2c_port, cmd, 1000 / portTICK_PERIOD_MS);
     i2c_cmd_link_delete(cmd);
     return ret;
 }
@@ -194,7 +194,7 @@ static esp_err_t OLEDDisplay_sendPayload(OLEDDisplay_t *oled, uint8_t *buf, size
     i2c_master_write_byte(cmd, 0x40, BKG_ACK_CHECK  );
     i2c_master_write(cmd, buf, size, BKG_ACK_CHECK);
     i2c_master_stop(cmd);
-    esp_err_t ret = i2c_master_cmd_begin(oled->i2c_port, cmd, 1000 / portTICK_RATE_MS);
+    esp_err_t ret = i2c_master_cmd_begin(oled->i2c_port, cmd, 1000 / portTICK_PERIOD_MS);
     i2c_cmd_link_delete(cmd);
     return ret;
 }
